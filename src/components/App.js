@@ -11,7 +11,8 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   function handleCategoryChange(event) {
-    setSelectedCategory(event.target.value);
+    setSelectedCategory(event.target.innerText);
+    console.log(event)
   }
   const taskToDisplay = TASKS
   .filter((task) => {

@@ -2,10 +2,10 @@ import React,{useState} from "react";
 import Task from "./Task"
 
 function TaskList({Tasks, taskToDisplay}) {
-  const [setDelete, setSelectDelete]=useState(Tasks)
+  const [setDelete, setSelectDelete]=useState(taskToDisplay)
 
 
-  console.log(Tasks)
+  //console.log(Tasks)
 
   function deleteTask(e) {
      console.log(e.target.name)
@@ -16,7 +16,7 @@ function TaskList({Tasks, taskToDisplay}) {
   return (
     <div className="tasks">
       {/* display a list of tasks using Task component */}
-  {setDelete.map((task) => (
+  {taskToDisplay.map((task) => (
           < Task className="tasks"
            key={task.text} category={task.category} text={task.text} deleteTask={deleteTask}  />
         ))}
