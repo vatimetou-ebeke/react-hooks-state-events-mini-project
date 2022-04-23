@@ -11,7 +11,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const[tasks , setTasks] = useState(TASKS)
   const [selectName, setSelectName] = useState("")
-  const [selectTaskCategory, setSelectTaskCategory] = useState()
+  const [selectTaskCategory, setSelectTaskCategory] = useState("Code")
   const [submittedTask, setSubmittedTask] = useState(tasks);
 
   //console.log(setSelectName)
@@ -27,7 +27,7 @@ function App() {
     console.log(selectName);
     const newItem = {
 
-      name: selectName,
+      text: selectName,
 
       category:selectTaskCategory,
     };
@@ -41,8 +41,8 @@ function App() {
 
 
   function handleItemName(event) {
-    console.log(event)
-      //setSelectName(event.target.value);
+    console.log(event.target.value)
+      setSelectName(event.target.value);
     }
 
 
@@ -50,6 +50,7 @@ function App() {
     setSelectedCategory(event.target.innerText);
     console.log(event)
   }
+ 
   const taskToDisplay = submittedTask
   .filter((task) => {
     if (selectedCategory === "All") return true;
@@ -58,7 +59,7 @@ function App() {
 
   function deleteTask(e) {
     console.log(e.target.name)
-   setTasks(tasks.filter(task => task.text !== e.target.name))
+    setSubmittedTask(submittedTask.filter(task => task.text !== e.target.name))
 }
 
 

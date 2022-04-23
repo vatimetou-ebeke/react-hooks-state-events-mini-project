@@ -1,6 +1,7 @@
 import React from "react";
 
 function Task({text, category, deleteTask}) {
+  console.log(text)
   return (
     <div className="task">
       <div className="label">{category}</div>
