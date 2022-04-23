@@ -9,23 +9,65 @@ console.log({ CATEGORIES, TASKS });
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const[tasks , setTasks] = useState(TASKS)
+  const [selectName, setSelectName] = useState("")
+  const [selectTaskCategory, setSelectTaskCategory] = useState()
+  const [submittedTask, setSubmittedTask] = useState(tasks);
+
+  //console.log(setSelectName)
+
+
+  function handelCategory(event){
+    setSelectTaskCategory(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    
+    event.preventDefault();
+    console.log(selectName);
+    const newItem = {
+
+      name: selectName,
+
+      category:selectTaskCategory,
+    };
+    const dataArray = [...submittedTask, newItem];
+    setSubmittedTask(dataArray);
+   
+  }
+
+
+
+
+
+  function handleItemName(event) {
+    console.log(event)
+      //setSelectName(event.target.value);
+    }
+
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.innerText);
     console.log(event)
   }
-  const taskToDisplay = TASKS
+  const taskToDisplay = submittedTask
   .filter((task) => {
     if (selectedCategory === "All") return true;
     return task.category === selectedCategory;
   })
 
+  function deleteTask(e) {
+    console.log(e.target.name)
+   setTasks(tasks.filter(task => task.text !== e.target.name))
+}
+
+
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter Categories={CATEGORIES} handleCategoryChange={handleCategoryChange} />
-      <NewTaskForm />
-      <TaskList Tasks={TASKS}  taskToDisplay={taskToDisplay}/>
+      <NewTaskForm Categories={CATEGORIES}  handelName={handleItemName} handleSubmit={ handleSubmit} handelCategory={handelCategory}/>
+      <TaskList tasks={taskToDisplay} deleteTask={deleteTask} />
     </div>
   );
 }
